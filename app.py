@@ -1,6 +1,7 @@
 from flask import Flask, session
 from flask import render_template, redirect 
 from flask import url_for, flash
+from model import Item
 
 app = Flask(__name__)
 
@@ -11,10 +12,17 @@ def home():
 
 @app.route('/rack')
 def rack():
+    items = Item.get_database()
+
     return "rack page"
 
 @app.route('/combos')
 def combos():
+    items = Item.get_database()
+    tops = items['top']
+    bottoms = items['bottom']
+    shoes = items['shoes']
+    
     return 'combos'
 
 @app.route('/login')

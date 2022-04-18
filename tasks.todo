@@ -2,12 +2,15 @@ Todos:
     New:
         ☐ Create weather class to communicate with weather API
         ☐ Create class to add items to a .txt file
-        ☐ Create .txt file to contain clothes info, weather info
+        ☐ Create .txt file to contain clothes info, weather info @high
         ☐ Build home page (HTML/CSS)
         ☐ Build rack page (HTML/CSS)
         ☐ Build login/logout page (HTML/CSS)
         ☐ Build generate page (HTML/CSS)
         ☐ Build combos page (HTML/CSS)
-        ☐ Build routes for various pages and connect with classes in flask
+        ☐ Build routes for various pages
+        ☐ Connect with classes in flask
         ☐ Merge flask with pages
         ☐ Implement weather API in home page
+
+        
