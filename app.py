@@ -6,14 +6,13 @@ from model import Item
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/index')
+#@app.route('/index')
 def home():
-    return "Home Page"
+    return render_template('index.html')
 
 @app.route('/rack')
 def rack():
     items = Item.get_database()
-
     return "rack page"
 
 @app.route('/combos')
