@@ -1,6 +1,6 @@
 from flask import Flask, session
 from flask import render_template, redirect 
-from flask import url_for, flash
+from flask import url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -44,16 +44,25 @@ class Saved(db.Model):
 def home():
     return render_template('index.html')
 
-@app.route('/rack')
+@app.route('/rack', methods=['GET', 'POST'])
 def rack():
-    return render_template('rack.html', items=Item.query.all())
+    all_items = Item.query.all()
+    # filters = Item.query.filter_by(style='casual', item_type='top')
+
+    if request.method == 'POST':  
+        filter_dict = {'item_type': request.form['filter-clothes'],
+                       'style': request.form['filter-style'],
+                       'season': request.form['filter-season']   
+                      }      
+        
+    return render_template('rack.html', items=all_items)
 
 @app.route('/combos')
 def combos():
     # items = Item.get_database()
-    tops = items['top']
-    bottoms = items['bottom']
-    shoes = items['shoes']
+    # tops = items['top']
+    # bottoms = items['bottom']
+    # shoes = items['shoes']
     
     return render_template('combo.html')
 

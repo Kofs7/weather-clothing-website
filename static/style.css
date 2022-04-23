@@ -1,0 +1,43 @@
+/* select{
+    display: inline-block;
+} */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+.container-fluid .d-flex a{
+    font-size: 21px;
+    font-weight: bold;
+}
+.container-fluid ul li a{
+    font-size: 17px;
+    font-weight: 500;
+}
+.rack-title{
+    /* transform: translateX(40%); */
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 90px;
+}
+.rack-title h1{
+    font-weight: 600;
+    font-size: 35px;
+    letter-spacing: 1.9px;
+}
+.rack-title h3{
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: 1.7px;
+    line-height: 10px;
+}
+.rack-page{
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    gap: 30px;
+}
+.rack-page img{
+    width: 200px;
+    height: 200px;
+}

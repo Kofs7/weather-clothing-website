@@ -2,8 +2,33 @@
 {% block title %} Clothes Rack {% endblock %}
 
 {% block content %}
-    <h1>Clothes Rack</h1>
-    {% for item in items %}
-        <p>Style: {{ item.style }}, Type: {{ item.item_type }}, Season: {{ item.season }}, Image: <img src="../{{ item.image }}" alt="" width="50px" height="50px"></p>
-    {% endfor %}
+    <div class="rack-title">
+        <h1>Clothes Rack</h1>
+        <h3>Available clothes for combinations</h3>
+    </div>
+    
+    <!-- <select name="filter-clothes" id="filter-clothes" onchange="this.form.submit()">
+        <option value="default" selected>all</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+        <option value="shoes">shoes</option>
+    </select>
+    <select name="filter-season" id="filter-season" onchange="this.form.submit()">
+        <option value="default" selected>all</option>
+        <option value="summer">summer</option>
+        <option value="spring">spring</option>
+        <option value="fall">fall</option>
+        <option value="winter">winter</option>        
+    </select>
+    <select name="filter-style" id="filter-style" onchange="this.form.submit()">
+        <option value="default" selected>all</option>
+        <option value="classic">classic</option>
+        <option value="casual">casual</option>
+        <option value="streetwear">streetwear</option>
+    </select> -->
+    <div class="rack-page">
+        {% for item in items %}
+            <img src="../{{ item.image }}" alt="{{ item.item_type }}">
+        {% endfor %}
+    </div>
 {% endblock %}
