@@ -1,36 +1,61 @@
 from flask import Flask, session
 from flask import render_template, redirect 
 from flask import url_for, flash
-from model import Item
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///databases/items.sqlite'
+app.config['SQLALCHEMY_BINDS'] = {
+    'users_saved': 'sqlite:///databases/user_saved.sqlite'
+}
+db = SQLAlchemy(app)
+
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    style = db.Column(db.String(20))
+    item_type = db.Column(db.String(50))
+    season = db.Column(db.String(50))
+    image = db.Column(db.String(100))
+
+    def __init__(self, style, item_type, season, image):
+        self.style = style
+        self.item_type = item_type
+        self.season = season
+        self.image = image
+class Saved(db.Model):
+    __bind_key__ = 'users_saved'
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(50))
+    item_type = db.Column(db.String(50))
+    season = db.Column(db.String(50))
+    image = db.Column(db.String(100))
+
+    def __init__(self, user, style, item_type, season, image):
+        self.user = user
+        self.style = style
+        self.item_type = item_type
+        self.season = season
+        self.image = image
+
 @app.route('/')
-#@app.route('/index')
+@app.route('/index')
 def home():
     return render_template('index.html')
 
 @app.route('/rack')
 def rack():
-    items = Item.get_database()
-    return "rack page"
+    return render_template('rack.html', items=Item.query.all())
 
 @app.route('/combos')
 def combos():
-    items = Item.get_database()
+    # items = Item.get_database()
     tops = items['top']
     bottoms = items['bottom']
     shoes = items['shoes']
     
-    return 'combos'
-
-@app.route('/login')
-def login():
-    return "login"
-
-@app.route('/logout')
-def logout():
-    return 'logout'
+    return render_template('combo.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

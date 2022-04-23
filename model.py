@@ -1,40 +1,59 @@
-from base64 import b64encode
-from PIL import Image
-import io
 import os
 
-
-class Item:
-    database = {'top': [], 'bottom': [], 'shoes': []}
-
+class Add_items:
     def __init__(self):
         pass
+        #options = casual, classic, streetwear
 
-    def new_item(self, item_name: str, item_type: str, season: list, image):
-        image_path = os.getcwd() + f"/{image}"
+    def add_top(self): #style, item_type, season
+        top = r'static/clothing-images/tops'
+
+        for x, file in enumerate(os.listdir(top)):
+            from app import db
+            from app import Item
+
+            weather = ['winter', 'spring', 'fall', 'fall', 'summer']
+            styles = ['casual', 'streetwear', 'casual', 'casual', 'casual']
+            
+            image_path = os.path.join(top, file)
+            if os.path.isfile(image_path):
+                item = Item(style=styles[x], item_type='top', season=weather[x], image=image_path)
+                db.session.add(item)
+        db.session.commit()
+    
+    def add_bottom(self):
+        bottom = r'static/clothing-images/bottoms'
+
+        for x, file in enumerate(os.listdir(bottom)):
+            from app import db
+            from app import Item
+
+            weather = ['spring', 'spring', 'summer', 'spring', 'summer', 'fall', 'winter']
+            styles = ['classic', 'casual', 'casual', 'classic', 'casual', 'streetwear', 'casual']
+            
+            image_path = os.path.join(bottom, file)
+            if os.path.isfile(image_path):
+                item = Item(style=styles[x], item_type='bottom', season=weather[x], image=image_path)
+                db.session.add(item)
+        db.session.commit()
+
+    def add_shoes(self):
+        shoes = r'static/clothing-images/shoes'
         
-        im = Image.open(image_path)
-        image_bytes = io.BytesIO()
-        im.save(image_bytes, format="JPEG")
+        for x, file in enumerate(os.listdir(shoes)):
+            from app import db
+            from app import Item
 
-        img_str = b64encode(image_bytes.getvalue())
-        final_str = img_str.decode('ascii')
+            weather = ['winter', 'spring', 'summer', 'spring', 'fall', 'spring', 'summer']
+            styles = ['casual', 'casual', 'casual', 'casual', 'casual', 'streetwear', 'casual']
+            
+            image_path = os.path.join(shoes, file)
+            if os.path.isfile(image_path):
+                item = Item(style=styles[x], item_type='shoes', season=weather[x], image=image_path)
+                db.session.add(item)
+        db.session.commit()
 
-        tops = {'shirt', 'coat', 'jacket', 'hoodie', 'jumper'}
-        bottoms = {'shorts', 'trousers', 'pants', 'sweatpants', 'denim', 'jeans', 'chinos'}
-        shoes = {'trainers', 'sneakers', 'sandals', 'flip flops', 'slippers', 'slides', 'boots'}
-
-        if item_type in tops:
-            self.database['top'].append({'name': item_name, 'season': season, 'image': final_str})
-        if item_type in bottoms:
-            self.database['bottom'].append({'name': item_name, 'season': season, 'image': final_str})
-        if item_type in shoes:
-            self.database['shoes'].append({'name': item_name, 'season': season, 'image': final_str})
-
-    @classmethod
-    def get_database(cls):
-        return cls.database
-
-db = Item()
-db.new_item('nike tye-dye', 'shirt', ['summer', 'spring'], 'nikeshirt.jpeg')
-print(db.get_database())
+item = Add_items()
+item.add_top()
+item.add_bottom()
+item.add_shoes()
