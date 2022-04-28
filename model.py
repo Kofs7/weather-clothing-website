@@ -4,6 +4,7 @@ class Add_items:
     def __init__(self):
         pass
         #options = casual, classic, streetwear
+        #weather = sunny, rainy, cloudy, snowy
 
     def add_top(self): #style, item_type, season
         top = r'static/clothing-images/tops'
@@ -12,12 +13,12 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['winter', 'spring', 'fall', 'fall', 'summer']
+            weather = ['snowy', 'cloudy', 'sunny', 'cloudy', 'sunny']
             styles = ['casual', 'streetwear', 'casual', 'casual', 'casual']
             
             image_path = os.path.join(top, file)
             if os.path.isfile(image_path):
-                item = Item(style=styles[x], item_type='top', season=weather[x], image=image_path)
+                item = Item(style=styles[x], item_type='top', weather=weather[x], image=image_path)
                 db.session.add(item)
         db.session.commit()
     
@@ -28,12 +29,12 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['spring', 'spring', 'summer', 'spring', 'summer', 'fall', 'winter']
+            weather = ['sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'cloudy', 'snowy']
             styles = ['classic', 'casual', 'casual', 'classic', 'casual', 'streetwear', 'casual']
             
             image_path = os.path.join(bottom, file)
             if os.path.isfile(image_path):
-                item = Item(style=styles[x], item_type='bottom', season=weather[x], image=image_path)
+                item = Item(style=styles[x], item_type='bottom', weather=weather[x], image=image_path)
                 db.session.add(item)
         db.session.commit()
 
@@ -44,12 +45,12 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['winter', 'spring', 'summer', 'spring', 'fall', 'spring', 'summer']
+            weather = ['snowy', 'sunny', 'sunny', 'sunny', 'cloudy', 'cloudy', 'sunny']
             styles = ['casual', 'casual', 'casual', 'casual', 'casual', 'streetwear', 'casual']
             
             image_path = os.path.join(shoes, file)
             if os.path.isfile(image_path):
-                item = Item(style=styles[x], item_type='shoes', season=weather[x], image=image_path)
+                item = Item(style=styles[x], item_type='shoes', weather=weather[x], image=image_path)
                 db.session.add(item)
         db.session.commit()
 

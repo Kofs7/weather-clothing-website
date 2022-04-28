@@ -5,8 +5,8 @@ Todos:
         ✔ Create db to contain clothes info @done(22-04-23 13:48)
         ☐ Create db to interact with weather info @high
         ☐ Build home page (HTML/CSS)
-        ☐ Build rack page (HTML/CSS)
-        ☐ Build login/logout page (HTML/CSS)
+        ✔ Build rack page (HTML/CSS) @done(22-04-23 21:23)
+        ✘ Build login/logout page (HTML/CSS) @cancelled(22-04-23 21:23)
         ☐ Build generate page (HTML/CSS)
         ☐ Build combos page (HTML/CSS)
         ☐ Build routes for various pages

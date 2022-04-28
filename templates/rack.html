@@ -4,7 +4,12 @@
 {% block content %}
     <div class="rack-title">
         <h1>Clothes Rack</h1>
-        <h3>Available clothes for combinations</h3>
+        <div class="desc">
+            <h3>Check out our available clothing for your weekly combinations.
+                Browse what's trending on WEATHER FITS' range of jumpers, pants,
+                sneakers, and more...</h3>
+            <p>{{ items|length }} items found</p>
+        </div>
     </div>
     
     <!-- <select name="filter-clothes" id="filter-clothes" onchange="this.form.submit()">
