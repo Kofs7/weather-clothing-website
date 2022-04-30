@@ -2,5 +2,47 @@
 {% block title %} Clothes combinations {% endblock %}
 
 {% block content %}
-    <h1>Clothes combinations</h1>
+    <div class="rack-title">
+        <h1>Clothes combinations</h1>
+        <div class="desc">
+            <h3>Make your selection of our available clothes and 
+                footwear to suit the weather and your taste.</h3>
+        </div>
+    </div>
+    
+    <div class="selection-desc">
+        <h3>Select your top</h3>
+    </div>
+    <div class="rack-page">
+        {% for top in tops %}
+            <div class="item-selec">
+                <img src="../{{ top.image }}" alt="{{ top.item_type }}">
+                <!-- <button type="submit"></button> -->
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="selection-desc other">
+        <h3>Select your bottom</h3>
+    </div>
+    <div class="rack-page">
+        {% for bottom in bottoms %}
+            <div class="item-selec">
+                <img src="../{{ bottom.image }}" alt="{{ bottom.item_type }}">
+                <!-- <button type="submit"></button> -->
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="selection-desc other">
+        <h3>Select your shoes</h3>
+    </div>
+    <div class="rack-page">
+        {% for shoe in shoes %}
+            <div class="item-selec">
+                <img src="../{{ shoe.image }}" alt="{{ shoe.item_type }}">
+                <!-- <button type="submit"></button> -->
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

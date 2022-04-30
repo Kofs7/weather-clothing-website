@@ -69,8 +69,11 @@ def combos():
     # tops = items['top']
     # bottoms = items['bottom']
     # shoes = items['shoes']
+    top_filter = Item.query.filter_by(item_type='top')
+    bottom_filter = Item.query.filter_by(item_type='bottom')
+    shoes_filter = Item.query.filter_by(item_type='shoes')
     
-    return render_template('combo.html')
+    return render_template('combo.html', tops=top_filter, bottoms=bottom_filter, shoes=shoes_filter)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():

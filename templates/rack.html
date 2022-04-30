@@ -11,26 +11,7 @@
             <p>{{ items|length }} items found</p>
         </div>
     </div>
-    
-    <!-- <select name="filter-clothes" id="filter-clothes" onchange="this.form.submit()">
-        <option value="default" selected>all</option>
-        <option value="top">top</option>
-        <option value="bottom">bottom</option>
-        <option value="shoes">shoes</option>
-    </select>
-    <select name="filter-season" id="filter-season" onchange="this.form.submit()">
-        <option value="default" selected>all</option>
-        <option value="summer">summer</option>
-        <option value="spring">spring</option>
-        <option value="fall">fall</option>
-        <option value="winter">winter</option>        
-    </select>
-    <select name="filter-style" id="filter-style" onchange="this.form.submit()">
-        <option value="default" selected>all</option>
-        <option value="classic">classic</option>
-        <option value="casual">casual</option>
-        <option value="streetwear">streetwear</option>
-    </select> -->
+   
     <div class="rack-page">
         {% for item in items %}
             <img src="../{{ item.image }}" alt="{{ item.item_type }}">
