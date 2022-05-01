@@ -62,27 +62,51 @@ class Add_items:
 # item.add_shoes()
 
 # * Weather API filter
-api_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Washington%2C%20DC/today?unitGroup=us&key=K3WUKAZ4638HASZFK2UBXBU3X&contentType=json"
+# api_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Washington%2C%20DC/today?unitGroup=us&key=K3WUKAZ4638HASZFK2UBXBU3X&contentType=json"
 
-def current_season():
-    try: 
-        result_bytes = urllib.request.urlopen(api_URL)
-        # Parse the results as JSON
-        jsonData = json.loads(result_bytes.read().decode('utf-8'))
-    except urllib.error.HTTPError  as e:
-        ErrorInfo= e.read().decode() 
-        print('Error code: ', e.code, ErrorInfo)
-        sys.exit()
-    except  urllib.error.URLError as e:
-        ErrorInfo= e.read().decode() 
-        print('Error code: ', e.code,ErrorInfo)
-        sys.exit()
+# def current_season():
+#     try: 
+#         result_bytes = urllib.request.urlopen(api_URL)
+#         # Parse the results as JSON
+#         jsonData = json.loads(result_bytes.read().decode('utf-8'))
+#     except urllib.error.HTTPError  as e:
+#         ErrorInfo= e.read().decode() 
+#         print('Error code: ', e.code, ErrorInfo)
+#         sys.exit()
+#     except  urllib.error.URLError as e:
+#         ErrorInfo= e.read().decode() 
+#         print('Error code: ', e.code,ErrorInfo)
+#         sys.exit()
 
-    if jsonData['currentConditions']['temp'] <= 32.0:
-        return "snowy"
-    elif jsonData['currentConditions']['temp'] > 32.0 and jsonData['currentConditions']['temp'] <= 71.0:
-        return "cloudy"
-    elif jsonData['currentConditions']['temp'] > 71.0 and jsonData['currentConditions']['temp'] <= 84.0:
-        return "rainy"
-    else:
-        return "sunny"
+#     if jsonData['currentConditions']['temp'] <= 32.0:
+#         return "snowy"
+#     elif jsonData['currentConditions']['temp'] > 32.0 and jsonData['currentConditions']['temp'] <= 71.0:
+#         return "cloudy"
+#     elif jsonData['currentConditions']['temp'] > 71.0 and jsonData['currentConditions']['temp'] <= 84.0:
+#         return "rainy"
+#     else:
+#         return "sunny"
+
+# * Get selected clothes
+class Selected_items:
+    def __init__(self, top, bottom, shoes):
+        self.top = top
+        self.bottom = bottom
+        self.shoes = shoes
+    
+    def get_items(self):
+        clothes_lst = [self.top, self.bottom, self.shoes]
+        clothes_dict = {
+            'top': '',
+            'bottom': '',
+            'shoes': ''
+        }
+        for item in clothes_lst:
+            if item.find('/tops') > 0:
+                clothes_dict['top'] = item
+            if item.find('/bottoms') > 0:
+                clothes_dict['bottom'] = item
+            if item.find('/shoes') > 0:
+                clothes_dict['shoes'] = item
+        
+        return clothes_dict

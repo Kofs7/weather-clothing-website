@@ -32,12 +32,21 @@
             <a class="nav-link" href="{{ url_for('combos') }}">Combinations</a>
           </li>
         </ul>
-        <ul class="nav navbar-nav ml-auto w-100 justify-content-end" id="login">
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
           <li class="nav-item">
+            <a href="{{ url_for('saved') }}" class="nav-link">Saved</a>
+          </li>
+          <li class="nav-item logs">
             <a href="{{ url_for('login') }}" class="nav-link">
               <i class='bx bx-user'></i>
             </a>
             <span>Login</span>
+          </li>
+          <li class="nav-item logs">
+            <a href="{{ url_for('logout') }}" class="nav-link">
+              <i class='bx bx-log-out-circle'></i>
+            </a>
+            <span>Logout</span>
           </li>
         </ul>
       </div>

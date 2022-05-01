@@ -17,12 +17,14 @@
             <h2>View your combination below</h2>
             <table class="gen-header">
                 <tbody>
-                    <tr>
-                        <td>
-                            <img src="../static/clothing-images/tops/coat.jpeg" alt="">
-                        </td>
-                    </tr>
-                    <tr>
+                    {% for item in clothings %}
+                        <tr>
+                            <td>
+                                <img src="../{{ item }}" alt="">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <!-- <tr>
                         <td>
                             <img src="../static/clothing-images/bottoms/denim.jpg" alt="">
                         </td>
@@ -34,7 +36,7 @@
                     </tr>
                     <tr>
                         <td class="bottom-space"></td>
-                    </tr>
+                    </tr> -->
                     <tfoot>
                         <tr>
                             <td>

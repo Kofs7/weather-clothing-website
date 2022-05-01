@@ -2,7 +2,7 @@ from flask import Flask, session
 from flask import render_template, redirect 
 from flask import url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
-from model import current_season
+# from model import current_season
 
 app = Flask(__name__)
 app.secret_key = 'tH1x93H??s1Zow_#~2'
@@ -52,34 +52,40 @@ def home():
     #     return render_template('index.html', name=user)
     return render_template('index.html')
 
+
 @app.route('/rack', methods=['GET', 'POST'])
 def rack():
-    all_items = Item.query.all()
-    #filters = Item.query.filter_by(style='casual', item_type='top')
-
-    # if request.method == 'POST':  
-    #     filter_dict = {'item_type': request.form['filter-clothes'],
-    #                    'style': request.form['filter-style'],
-    #                    'weather': request.form['filter-weather']   
-    #                   }      
-        
+    all_items = Item.query.all()   
     return render_template('rack.html', items=all_items)
 
-@app.route('/combos')
+
+@app.route('/combos', methods=["GET", "POST"])
 def combos():
-    weather_filter = current_season()
+    # weather_filter = current_season()
     # top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
     # bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
     # shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
     top_filter = Item.query.filter_by(item_type='top')
     bottom_filter = Item.query.filter_by(item_type='bottom')
     shoes_filter = Item.query.filter_by(item_type='shoes')
-    
     return render_template('combo.html', tops=top_filter, bottoms=bottom_filter, shoes=shoes_filter)
 
-@app.route('/generated-combo')
+
+@app.route('/generated-combo', methods=['POST', "GET"])
 def generate():
-    return render_template('generate.html')
+    from model import Selected_items
+    
+    if request.method == 'POST':
+        clothes = request.form.getlist('cloth_checkbox')
+        selected_top = clothes[0]
+        selected_bottom = clothes[1]
+        selected_shoe = clothes[2]
+
+        items = Selected_items(selected_top, selected_bottom, selected_shoe)
+        clothes_list = items.get_items().values()
+        return render_template('generate.html', clothings=clothes_list)
+    return redirect(url_for('home'))
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -92,6 +98,21 @@ def login():
         if 'user' in session:
             redirect(url_for('home')) 
         return render_template('login.html')
+
+
+@app.route('/saved')
+def saved():
+    from model import Selected_items
+    items = Selected_items()
+    return render_template('saved.html', stuff=items.display_items(), one=items.top,two=items.bottom,three=items.shoe)
+
+
+@app.route('/logout')
+def logout():
+    if 'user' in session:
+        flash(f"Successful log out, {session['user']}!!",  "info")
+        session.pop('user')
+    return render_template('logout.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

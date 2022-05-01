@@ -7,45 +7,59 @@
         <div class="desc">
             <h3>Make your selection of our available clothes and 
                 footwear to suit the weather and your taste.</h3>
-            <a href="{{ url_for('generate') }}" target="_blank">
-                <button class="save-btn" type="submit" id="gen-btn">Generate</button>
-            </a>
         </div>
     </div>
     
-    <div class="selection-desc">
-        <h3>Select your top</h3>
-    </div>
-    <div class="rack-page">
-        {% for top in tops %}
-            <div class="item-selec">
-                <img src="../{{ top.image }}" alt="{{ top.item_type }}">
-                <button type="submit" class="select-btn">Select</button>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="selection-desc other">
-        <h3>Select your bottom</h3>
-    </div>
-    <div class="rack-page">
-        {% for bottom in bottoms %}
-            <div class="item-selec">
-                <img src="../{{ bottom.image }}" alt="{{ bottom.item_type }}">
-                <button type="submit" class="select-btn">Select</button>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="selection-desc other">
-        <h3>Select your shoes</h3>
-    </div>
-    <div class="rack-page">
-        {% for shoe in shoes %}
-            <div class="item-selec">
-                <img src="../{{ shoe.image }}" alt="{{ shoe.item_type }}">
-                <button type="submit" class="select-btn">Select</button>
-            </div>
-        {% endfor %}
-    </div>
+    <form action="/generated-combo" method="POST" id="clothes-choice" target="_blank"> <!--http://httpbin.org/post-->
+        <div class="generate-btn">
+            <button class="save-btn" type="submit" id="gen-btn">Generate</button>
+        </div>
+        <div class="selection-desc">
+            <h3>Select your top</h3>
+        </div>
+        <div class="rack-page">
+            {% for top in tops %}
+                <div class="item-selec">
+                    <img src="../{{ top.image }}" alt="{{ top.item_type }}">
+                    <div class="select-btn">
+                        <input type="checkbox" id="{{ top.id }}" value="{{ top.image }}" name="cloth_checkbox">
+                        <label for="{{ top.id }}">Select</label>
+                    </div>                    
+               <!-- <button type="submit" name="{{ top.item_type }}" value="{{ top.item_type }}" class="select-btn">Select</button> -->
+                </div>
+            {% endfor %}
+        </div>
+    
+        <div class="selection-desc other">
+            <h3>Select your bottom</h3>
+        </div>
+        <div class="rack-page">
+            {% for bottom in bottoms %}
+                <div class="item-selec">
+                    <img src="../{{ bottom.image }}" alt="{{ bottom.item_type }}">
+                    <div class="select-btn">
+                        <input type="checkbox" id="{{ bottom.id }}" value="{{ bottom.image }}" name="cloth_checkbox">
+                        <label for="{{ bottom.id }}">Select</label>
+                    </div>   
+                    <!-- <button type="submit" name="{{ bottom.item_type }}" value="{{ bottom.item_type }}" class="select-btn">Select</button> -->
+                </div>
+            {% endfor %}
+        </div>
+    
+        <div class="selection-desc other">
+            <h3>Select your shoes</h3>
+        </div>
+        <div class="rack-page">
+            {% for shoe in shoes %}
+                <div class="item-selec">
+                    <img src="../{{ shoe.image }}" alt="{{ shoe.item_type }}">
+                    <div class="select-btn">
+                        <input type="checkbox" id="{{ shoe.id }}" value="{{ shoe.image }}" name="cloth_checkbox">
+                        <label for="{{ shoe.id }}">Select</label>
+                    </div>   
+                    <!-- <button type="submit" name="{{ shoe.item_type }}" value="{{ shoe.item_type }}" class="select-btn">Select</button> -->
+                </div>
+            {% endfor %}
+        </div>
+    </form>
 {% endblock %}

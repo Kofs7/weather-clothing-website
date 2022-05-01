@@ -28,17 +28,17 @@
 .navbar #collapsingNavbar3 ul li a:hover{
     color: #aca4a4;
 }
-.navbar #login li a i{
+.navbar .logs a i{
     color: #ffffff;
     font-size: 22px;
 }
-.navbar #login li a i:hover{
+.navbar .logs a i:hover{
     color: #000;
 }
-.navbar #login li:hover span{
+.navbar .logs:hover span{
     opacity:1;
 }
-.navbar #login li span{
+.navbar .logs span{
     position: absolute;
     opacity: 0;
     margin-left: -20px;
@@ -231,13 +231,23 @@
 .other{
     margin-top: 70px;
 }
-.item-selec .select-btn{
+/* .select-btn label{
     cursor: pointer;
-    transform: translate(30px, 10px);
+    transform: translate(50px, 10px);
     text-align: center;
     width: 50%;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #000;
 }
+.select-btn input:checked ~ label {
+    color: #ffffff;
+    background: #000;
+  } */
 .gen-body{
     width: 300px;
     height: auto;
@@ -277,6 +287,7 @@
 }
 .save-btn{
     font-size: 16px;
+    /* text-align: center; */
     font-weight: 600;
     padding: 2px 12px;
     cursor: pointer;
@@ -289,7 +300,19 @@
     color: #fff;
     background: #000;
 }
-.desc #gen-btn{
-    margin-top: 30px;
+.generate-btn{
+    margin:-40px 0 40px 0;
     font-size: 18px;
+    text-align: center;
+}
+.log-body{
+    margin: 20% 0 0 30%;
+    width: 40%;
+    text-align: center;
+}
+.log-body h2{
+    color: #ffffff;
+    padding: 20px;
+    background: #000;
+    border-radius: 5px;
 }
