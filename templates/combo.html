@@ -7,6 +7,9 @@
         <div class="desc">
             <h3>Make your selection of our available clothes and 
                 footwear to suit the weather and your taste.</h3>
+            <a href="{{ url_for('generate') }}" target="_blank">
+                <button class="save-btn" type="submit" id="gen-btn">Generate</button>
+            </a>
         </div>
     </div>
     
@@ -17,7 +20,7 @@
         {% for top in tops %}
             <div class="item-selec">
                 <img src="../{{ top.image }}" alt="{{ top.item_type }}">
-                <!-- <button type="submit"></button> -->
+                <button type="submit" class="select-btn">Select</button>
             </div>
         {% endfor %}
     </div>
@@ -29,7 +32,7 @@
         {% for bottom in bottoms %}
             <div class="item-selec">
                 <img src="../{{ bottom.image }}" alt="{{ bottom.item_type }}">
-                <!-- <button type="submit"></button> -->
+                <button type="submit" class="select-btn">Select</button>
             </div>
         {% endfor %}
     </div>
@@ -41,7 +44,7 @@
         {% for shoe in shoes %}
             <div class="item-selec">
                 <img src="../{{ shoe.image }}" alt="{{ shoe.item_type }}">
-                <!-- <button type="submit"></button> -->
+                <button type="submit" class="select-btn">Select</button>
             </div>
         {% endfor %}
     </div>

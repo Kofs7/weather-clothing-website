@@ -67,16 +67,19 @@ def rack():
 
 @app.route('/combos')
 def combos():
-    # items = Item.get_database()
-    # tops = items['top']
-    # bottoms = items['bottom']
-    # shoes = items['shoes']
     weather_filter = current_season()
-    top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
-    bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
-    shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
+    # top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
+    # bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
+    # shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
+    top_filter = Item.query.filter_by(item_type='top')
+    bottom_filter = Item.query.filter_by(item_type='bottom')
+    shoes_filter = Item.query.filter_by(item_type='shoes')
     
     return render_template('combo.html', tops=top_filter, bottoms=bottom_filter, shoes=shoes_filter)
+
+@app.route('/generated-combo')
+def generate():
+    return render_template('generate.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -91,4 +94,4 @@ def login():
         return render_template('login.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

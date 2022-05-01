@@ -92,8 +92,9 @@
     background: rgba(0,0,0,0.4);
 }
 .login-container{
+    margin-top: -80px;
     width: 30vw;
-    height: 25vh;
+    height: 20vh;
     box-shadow: 0 15px 35px #000;
     padding: 2em;
     background-color: #000;
@@ -144,6 +145,7 @@
 }
 .subBtn{
     text-align: center;
+    margin-top: -8%;
 }
 .subBtn .submitBtn{
     font-size: 20px;
@@ -220,7 +222,6 @@
 .dropdown:hover .dropbtn {
     background-color: #4169E1;
 }
-
 .selection-desc{
     text-align: center;
     font-size: 17px;
@@ -229,4 +230,66 @@
 }
 .other{
     margin-top: 70px;
+}
+.item-selec .select-btn{
+    cursor: pointer;
+    transform: translate(30px, 10px);
+    text-align: center;
+    width: 50%;
+    padding: 5px;
+}
+.gen-body{
+    width: 300px;
+    height: auto;
+    background: #fff;
+    position: relative;
+    margin: 2% auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px 5px rgba(0,0,0,0.5);
+    transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+    transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+}
+.gen-body .clothes-body{
+    text-align: center;
+}
+.gen-body .clothes-body table.gen-header{
+    margin-left: auto;
+    margin-right: auto;
+}
+.gen-body .clothes-body .gen-header tbody img{
+    width: 170px;
+}
+.gen-body .comp-name{
+    margin-bottom: 20px;
+}
+.gen-body .comp-name h1{
+    font-size: 20px;
+    font-weight: 800;
+}
+.clothes-body h2{
+    margin: 10px;
+    text-align: center;
+    font-weight: 400;
+}
+.clothes-body .bottom-space{
+    padding: 20px;
+}
+.save-btn{
+    font-size: 16px;
+    font-weight: 600;
+    padding: 2px 12px;
+    cursor: pointer;
+    border: 1px solid rgb(197, 188, 188);
+    border-radius: 5px;
+    transition: all 600ms cubic-bezier(0, 0, 0.18, 1);
+    transition-timing-function: cubic-bezier(0, 0, 0.18, 1);
+}
+.save-btn:hover{
+    color: #fff;
+    background: #000;
+}
+.desc #gen-btn{
+    margin-top: 30px;
+    font-size: 18px;
 }
