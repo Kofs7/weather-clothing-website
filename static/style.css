@@ -366,7 +366,7 @@ body {
 }
 .save-page{
     display: grid;
-    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     place-items: center center;
     margin-bottom: 20px;
