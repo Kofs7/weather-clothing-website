@@ -45,7 +45,7 @@ class Saved(db.Model):
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
@@ -60,9 +60,10 @@ def rack():
 def combos():
     weather_filter = current_season()
     if 'user' in session:
-        top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
-        bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
-        shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
+        clothes_style = request.form.get('filter-styles')
+        top_filter = Item.query.filter_by(item_type='top', weather=weather_filter, style=clothes_style)
+        bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter, style=clothes_style)
+        shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter, style=clothes_style)
         # top_filter = Item.query.filter_by(item_type='top')
         # bottom_filter = Item.query.filter_by(item_type='bottom')
         # shoes_filter = Item.query.filter_by(item_type='shoes')
@@ -83,7 +84,7 @@ def generate():
 
             items = Selected_items(selected_top, selected_bottom, selected_shoe)
             clothes_list = items.get_items().values()
-            add_stuff = items.add_to_saved(session['user'], '') #request.form['style']
+            add_stuff = items.add_to_saved(session['user'], '')
             return render_template('generate.html', clothings=clothes_list)
     return redirect(url_for('rack'))
 

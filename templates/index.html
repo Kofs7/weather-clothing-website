@@ -29,7 +29,44 @@
                         <p class="text-white mb-4">Input YOUR fashion style (casual, classic, streetwear) and different clothing combinations are 
                             displayed. A weather API is also included to show the user the weather and also 
                             automatically filter out the clothes suitable for the weather!</p>
-                        <a class="btn btn-light btn-xl" href="/combos">Get Started!</a>
+                        <!-- the DIV that will contain the widget -->
+                        <div class="weatherWidget mb-4" >
+                            <script>
+                                window.weatherWidgetConfig =  window.weatherWidgetConfig || [];
+                                window.weatherWidgetConfig.push({
+                                    selector:".weatherWidget",
+                                    apiKey:"K3WUKAZ4638HASZFK2UBXBU3X", //Sign up for your personal key
+                                    location:"Washington,DC", //Enter an address
+                                    unitGroup:"us", //"us" or "metric"
+                                    forecastDays:5, //how many days forecast to show
+                                    title:"Today's Weather Report", //optional title to show in the 
+                                    showTitle:true, 
+                                    showConditions:true
+                                });
+                               
+                                (function() {
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                                })();                             
+                             </script>
+                        </div>
+                        <h4 class="text-white mb-4">Please select your style</h4>
+                        <form action="/combos" id="style-input" method="POST">
+                            <div class="style-selection mb-4">
+                                <input type="radio" id="classic" value="classic" name="filter-styles">
+                                <label for="classic">Classic</label>
+                                <input type="radio" id="casual" value="casual" name="filter-styles">
+                                <label for="casual">Casual</label>
+                                <input type="radio" id="streetwear" value="streetwear" name="filter-styles">
+                                <label for="streetwear">Streetwear</label>
+                            </div>
+                            <button type="submit" class="btn style-btn">
+                                Get Started!
+                                <!-- <a class="btn btn-light btn-xl" href="/combos">Get Started!</a> -->
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -74,41 +111,4 @@
             </div>
         </div>
     </section>
-
-    <!-- the DIV that will contain the widget -->
-<div class="weatherWidget" ></div>
-
-<script>
-   window.weatherWidgetConfig =  window.weatherWidgetConfig || [];
-   window.weatherWidgetConfig.push({
-       selector:".weatherWidget",
-       apiKey:"K3WUKAZ4638HASZFK2UBXBU3X", //Sign up for your personal key
-       location:"Washington,DC", //Enter an address
-       unitGroup:"us", //"us" or "metric"
-       forecastDays:5, //how many days forecast to show
-       title:"Today's Weather Report", //optional title to show in the 
-       showTitle:true, 
-       showConditions:true
-   });
-  
-   (function() {
-   var d = document, s = d.createElement('script');
-   s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-   s.setAttribute('data-timestamp', +new Date());
-   (d.head || d.body).appendChild(s);
-   })();
-
-
-</script>
-
-    <div class="dropdown">
-
-        <button class="dropbtn">What is your choice of style today?</button>
-        <div class="dropdown-content">
-          <a href="index">Formal</a>
-          <a href="combos">Informal</a>
-          <a href="rack">Casual</a>
-        </div>
-    </div>
-
 {% endblock %}
