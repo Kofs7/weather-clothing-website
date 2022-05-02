@@ -15,8 +15,8 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['snowy', 'cloudy', 'sunny', 'cloudy', 'sunny']
-            styles = ['casual', 'streetwear', 'casual', 'casual', 'casual']
+            weather = ['sunny','sunny','sunny','sunny','sunny','snowy', 'cloudy', 'sunny', 'cloudy', 'sunny','snowy']
+            styles = ['casual','casual','classic','classic','classic','casual', 'streetwear', 'casual', 'casual', 'casual','casual']
             
             image_path = os.path.join(top, file)
             if os.path.isfile(image_path):
@@ -31,8 +31,8 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'cloudy', 'snowy']
-            styles = ['classic', 'casual', 'casual', 'classic', 'casual', 'streetwear', 'casual']
+            weather = ['sunny', 'sunny', 'sunny', 'rainy', 'sunny', 'sunny', 'cloudy', 'snowy']
+            styles = ['classic', 'casual', 'casual', 'casual', 'classic', 'casual', 'streetwear', 'casual']
             
             image_path = os.path.join(bottom, file)
             if os.path.isfile(image_path):
@@ -47,8 +47,8 @@ class Add_items:
             from app import db
             from app import Item
 
-            weather = ['snowy', 'sunny', 'sunny', 'sunny', 'cloudy', 'cloudy', 'sunny']
-            styles = ['casual', 'casual', 'casual', 'casual', 'casual', 'streetwear', 'casual']
+            weather = ['snowy', 'sunny', 'sunny', 'sunny', 'sunny', 'cloudy', 'cloudy', 'sunny']
+            styles = ['casual', 'classic', 'casual', 'casual', 'casual', 'casual', 'streetwear', 'casual']
             
             image_path = os.path.join(shoes, file)
             if os.path.isfile(image_path):
