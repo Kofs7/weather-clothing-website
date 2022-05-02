@@ -2,6 +2,14 @@
 {% block title %}Saved{% endblock %}
 
 {% block content %}
-{{ stuff }}
-{{one, two, three}}
+    <div class="rack-title">
+        <h1>{{ user }}'s combinations</h1>
+    </div>
+    <div class="save-page">
+        {% for things in stuff %}
+            {% if things.user == user %}
+                <img src="../{{ things.image }}" alt="">
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

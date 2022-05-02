@@ -22,10 +22,9 @@
                 <div class="item-selec">
                     <img src="../{{ top.image }}" alt="{{ top.item_type }}">
                     <div class="select-btn">
-                        <input type="checkbox" id="{{ top.id }}" value="{{ top.image }}" name="cloth_checkbox">
+                        <input type="checkbox" id="{{ top.id }}" value="{{ top.image }}" name="cloth_checkbox" hidden>
                         <label for="{{ top.id }}">Select</label>
                     </div>                    
-               <!-- <button type="submit" name="{{ top.item_type }}" value="{{ top.item_type }}" class="select-btn">Select</button> -->
                 </div>
             {% endfor %}
         </div>
@@ -38,10 +37,9 @@
                 <div class="item-selec">
                     <img src="../{{ bottom.image }}" alt="{{ bottom.item_type }}">
                     <div class="select-btn">
-                        <input type="checkbox" id="{{ bottom.id }}" value="{{ bottom.image }}" name="cloth_checkbox">
+                        <input type="checkbox" id="{{ bottom.id }}" value="{{ bottom.image }}" name="cloth_checkbox" hidden>
                         <label for="{{ bottom.id }}">Select</label>
                     </div>   
-                    <!-- <button type="submit" name="{{ bottom.item_type }}" value="{{ bottom.item_type }}" class="select-btn">Select</button> -->
                 </div>
             {% endfor %}
         </div>
@@ -54,10 +52,9 @@
                 <div class="item-selec">
                     <img src="../{{ shoe.image }}" alt="{{ shoe.item_type }}">
                     <div class="select-btn">
-                        <input type="checkbox" id="{{ shoe.id }}" value="{{ shoe.image }}" name="cloth_checkbox">
+                        <input type="checkbox" id="{{ shoe.id }}" value="{{ shoe.image }}" name="cloth_checkbox" hidden>
                         <label for="{{ shoe.id }}">Select</label>
                     </div>   
-                    <!-- <button type="submit" name="{{ shoe.item_type }}" value="{{ shoe.item_type }}" class="select-btn">Select</button> -->
                 </div>
             {% endfor %}
         </div>

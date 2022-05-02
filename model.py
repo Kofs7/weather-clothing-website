@@ -87,26 +87,36 @@ def current_season():
     else:
         return "sunny"
 
-# * Get selected clothes
+# * Get selected clothes and saving to db
 class Selected_items:
-    def __init__(self, top, bottom, shoes):
+    def __init__(self, top: str, bottom: str, shoes: str):
         self.top = top
         self.bottom = bottom
         self.shoes = shoes
-    
-    def get_items(self):
-        clothes_lst = [self.top, self.bottom, self.shoes]
-        clothes_dict = {
+        self.clothes_lst = [self.top, self.bottom, self.shoes]
+        self.clothes_dict = clothes_dict = {
             'top': '',
             'bottom': '',
             'shoes': ''
         }
-        for item in clothes_lst:
+    
+    def get_items(self):
+        for item in self.clothes_lst:
             if item.find('/tops') > 0:
-                clothes_dict['top'] = item
+                self.clothes_dict['top'] = item
             if item.find('/bottoms') > 0:
-                clothes_dict['bottom'] = item
+                self.clothes_dict['bottom'] = item
             if item.find('/shoes') > 0:
-                clothes_dict['shoes'] = item
+                self.clothes_dict['shoes'] = item
         
-        return clothes_dict
+        return self.clothes_dict
+
+    def add_to_saved(self, user: str, style: str):
+        from app import Saved
+        from app import db
+
+        for k, v in self.clothes_dict.items():
+            save_field = Saved(user=user, style=style, item_type=k, weather=current_season(), image=v)
+            db.session.add(save_field)
+        db.session.commit()
+

@@ -2,7 +2,7 @@ from flask import Flask, session
 from flask import render_template, redirect 
 from flask import url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
-# from model import current_season
+from model import current_season
 
 app = Flask(__name__)
 app.secret_key = 'tH1x93H??s1Zow_#~2'
@@ -31,6 +31,7 @@ class Saved(db.Model):
     __bind_key__ = 'users_saved'
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(50))
+    style = db.Column(db.String(20))
     item_type = db.Column(db.String(50))
     weather = db.Column(db.String(50))
     image = db.Column(db.String(100))
@@ -46,10 +47,6 @@ class Saved(db.Model):
 @app.route('/')
 @app.route('/index')
 def home():
-    # if 'user' in session:
-    #     session['user'] = request.form['name']
-    #     user = session['user']
-    #     return render_template('index.html', name=user)
     return render_template('index.html')
 
 
@@ -61,30 +58,45 @@ def rack():
 
 @app.route('/combos', methods=["GET", "POST"])
 def combos():
-    # weather_filter = current_season()
-    # top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
-    # bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
-    # shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
-    top_filter = Item.query.filter_by(item_type='top')
-    bottom_filter = Item.query.filter_by(item_type='bottom')
-    shoes_filter = Item.query.filter_by(item_type='shoes')
-    return render_template('combo.html', tops=top_filter, bottoms=bottom_filter, shoes=shoes_filter)
+    weather_filter = current_season()
+    if 'user' in session:
+        top_filter = Item.query.filter_by(item_type='top', weather=weather_filter)
+        bottom_filter = Item.query.filter_by(item_type='bottom', weather=weather_filter)
+        shoes_filter = Item.query.filter_by(item_type='shoes', weather=weather_filter)
+        # top_filter = Item.query.filter_by(item_type='top')
+        # bottom_filter = Item.query.filter_by(item_type='bottom')
+        # shoes_filter = Item.query.filter_by(item_type='shoes')
+        return render_template('combo.html', tops=top_filter, bottoms=bottom_filter, shoes=shoes_filter)
+    return redirect(url_for('login'))
 
 
 @app.route('/generated-combo', methods=['POST', "GET"])
 def generate():
     from model import Selected_items
     
-    if request.method == 'POST':
-        clothes = request.form.getlist('cloth_checkbox')
-        selected_top = clothes[0]
-        selected_bottom = clothes[1]
-        selected_shoe = clothes[2]
+    if 'user' in session:
+        if request.method == 'POST':
+            clothes = request.form.getlist('cloth_checkbox')
+            selected_top = clothes[0]
+            selected_bottom = clothes[1]
+            selected_shoe = clothes[2]
 
-        items = Selected_items(selected_top, selected_bottom, selected_shoe)
-        clothes_list = items.get_items().values()
-        return render_template('generate.html', clothings=clothes_list)
-    return redirect(url_for('home'))
+            items = Selected_items(selected_top, selected_bottom, selected_shoe)
+            clothes_list = items.get_items().values()
+            add_stuff = items.add_to_saved(session['user'], '') #request.form['style']
+            return render_template('generate.html', clothings=clothes_list)
+    return redirect(url_for('rack'))
+
+
+@app.route('/saved', methods=["GET", "POST"])
+def saved():
+    from model import Selected_items
+    
+    if 'user' in session:      
+        stuff = Saved.query.all()
+            
+        return render_template('saved.html', stuff=stuff, user=session['user'])
+    return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -98,13 +110,6 @@ def login():
         if 'user' in session:
             redirect(url_for('home')) 
         return render_template('login.html')
-
-
-@app.route('/saved')
-def saved():
-    from model import Selected_items
-    items = Selected_items()
-    return render_template('saved.html', stuff=items.display_items(), one=items.top,two=items.bottom,three=items.shoe)
 
 
 @app.route('/logout')
